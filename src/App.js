@@ -37,6 +37,9 @@ const App = () => {
   const handleFilterStringChange = (text) => {
     setFilterString(text)
   }
+  const handleLoginButton = () => {
+    window.location = "http://sptfy.xyz/auth/spotify"
+  }
   const handleSaveButton = async () => {
     
     
@@ -108,7 +111,7 @@ const App = () => {
                 </tbody>
               </table>
               <div className="footer">
-              http://GITHUB.com
+              https://github.com/akuakuka/SpotifyHelperv2-BE
                 </div>
             </div>
           </div>}
@@ -117,7 +120,9 @@ const App = () => {
       ) : (
           <div>
             <p>NOT LOGGED IN</p>
-            <p>http://localhost:3001/auth/spotify</p>
+            <button onClick={handleLoginButton}>
+  Log in with Spotify
+</button>
           </div>
         )}
     </div>
