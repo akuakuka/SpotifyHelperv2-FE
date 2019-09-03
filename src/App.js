@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import spotifyService from "./services/spotify";
 import Band from "./components/Band"
 import Loading from "./components/Loading"
+import Footer from "./components/Footer"
 import './Table.css';
 import _ from "lodash/array";
 
@@ -106,7 +107,7 @@ const App = () => {
                     Remove all saved albums
                 </button>
                 </div>
-
+                {artists.length=== 0 ? <div> you are not following any artists! </div> :
                 <div className="container">
                   <table>
                     <thead>
@@ -119,10 +120,8 @@ const App = () => {
                       {bands()}
                     </tbody>
                   </table>
-                  <div className="footer">
-                    https://github.com/akuakuka/SpotifyHelperv2-BE
-                </div>
-                </div>
+                  <Footer/>
+                </div>} 
               </div>}
           </div>
         </div>
