@@ -20,6 +20,7 @@ table {
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   border-bottom: 100px;
+  margin-bottom: 60px;
 }
 th,
 td {
