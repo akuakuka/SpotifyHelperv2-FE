@@ -3,7 +3,9 @@ import spotifyService from "./services/spotify";
 import Band from "./components/Band"
 import Loading from "./components/Loading"
 import './Table.css';
-import _ from "lodash/array"
+import _ from "lodash/array";
+
+
 const App = () => {
   const [user, setUser] = useState({});
   const [artists, setArtists] = useState([]);
@@ -16,7 +18,7 @@ const App = () => {
     const init = async () => {
       const auth = await spotifyService.ensureAuthenticated();
       console.log(auth)
-      if (auth.data != "Not Logged in!") {
+      if (auth.data !== "Not Logged in!") {
         toggleLoggedIn(true);
         const user = await spotifyService.getMe();
         toggleLoading(true);
@@ -80,10 +82,12 @@ const App = () => {
     <div className="App">
       {loggedIn ? (
         <div>
-          <p>Logged in as {user.id}</p>
+          
           <div>
             {loading ? <div> <Loading /> </div> :
+            
               <div>
+                <p>Logged in as {user.id}</p>
                 <div className="filter">
 
                   <input

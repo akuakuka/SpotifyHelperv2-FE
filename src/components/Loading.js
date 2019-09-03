@@ -2,14 +2,11 @@
 import React from 'react';
 import '../App.css';
 import '../Table.css';
-//import '../fontawesome.js'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-
+import { FaCompactDisc } from 'react-icons/fa';
 const Loading = () => {  
     return (
 <div className="loading">
-LOADING=!="#=!#="
+  <FaCompactDisc faStyle="spinner"  animate="spin"size={80}/>
 </div>
 
     );
