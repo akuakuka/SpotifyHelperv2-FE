@@ -47,7 +47,7 @@ const App = () => {
     setFilterString(text)
   }
   const handleLoginButton = () => {
-    window.location = "baseURL"
+    window.location = baseURL
   }
   const handleSaveButton = async () => {
 
