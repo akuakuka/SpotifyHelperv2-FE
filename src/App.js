@@ -8,7 +8,7 @@ import _ from "lodash/array";
 import dotenv from 'dotenv'
 dotenv.config();
 const baseURL = process.env.REACT_APP_APIURL;
-
+const loginURL = process.env.REACT_APP_LOGINURL;
 const App = () => {
   const [user, setUser] = useState({});
   const [artists, setArtists] = useState([]);
@@ -47,7 +47,8 @@ const App = () => {
     setFilterString(text)
   }
   const handleLoginButton = () => {
-    window.location = baseURL
+
+    window.location = loginURL;
   }
   const handleSaveButton = async () => {
 
