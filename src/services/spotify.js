@@ -1,5 +1,8 @@
 import axios from 'axios'
-const baseURL = 'http://localhost:3001/api/spotify'
+import dotenv from 'dotenv'
+dotenv.config();
+const baseURL = process.env.REACT_APP_APIURL;
+
 const a = axios.create({
     baseURL,
     withCredentials: true,
