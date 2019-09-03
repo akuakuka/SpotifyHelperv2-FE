@@ -3,7 +3,7 @@ import spotifyService from "./services/spotify";
 import Band from "./components/Band"
 import Loading from "./components/Loading"
 import './Table.css';
-import _  from "lodash/array"
+import _ from "lodash/array"
 const App = () => {
   const [user, setUser] = useState({});
   const [artists, setArtists] = useState([]);
@@ -15,6 +15,7 @@ const App = () => {
 
     const init = async () => {
       const auth = await spotifyService.ensureAuthenticated();
+      console.log(auth)
       if (auth.statusText === "OK") {
         toggleLoggedIn(true);
         const user = await spotifyService.getMe();
@@ -22,7 +23,7 @@ const App = () => {
         const artistWithAlbums = await spotifyService.getArtistWithAlbums();
         console.log(artistWithAlbums.data)
         setArtists(artistWithAlbums.data);
-   
+
         toggleLoading(false);
         setUser(user.data.body);
       } else {
@@ -33,33 +34,36 @@ const App = () => {
 
   }, []);
 
-
+  const handleRemoveButton = async () => {
+    const rsp = await spotifyService.removeAllfollowedAlbums();
+    console.log(rsp)
+  }
   const handleFilterStringChange = (text) => {
     setFilterString(text)
   }
   const handleLoginButton = () => {
-    window.location = "http://sptfy.xyz/auth/spotify"
+    window.location = "http://localhost:3001/auth/spotify"
   }
   const handleSaveButton = async () => {
-    
-    
+
+
     const rsp = await spotifyService.saveAlbumsToUser(checked)
     console.log(rsp)
   }
- const bands = () => artists.filter(kk => kk.name.toUpperCase()
- .includes(filterString.toUpperCase())).map(band =>
-   <Band
-     key={band.id}
-     band={band}
-     check={handleCheckBox}
-   />
-  )
- 
+  // const bands = () => artists.filter(kk => kk.name.toUpperCase()
+  //   .includes(filterString.toUpperCase())).map(band =>
+  //     <Band
+  //       key={band.id}
+  //       band={band}
+  //       check={handleCheckBox}
+  //     />
+  //   )
+
   const handleCheckBox = async (band) => {
     let inx = _.indexOf(checked, band);
-    if ( inx >= 0) {
+    if (inx >= 0) {
       let array = checked;
-      _.remove(array, function(n) {
+      _.remove(array, function (n) {
         return band.id === n.id;
       });
       setChecked(array)
@@ -68,8 +72,6 @@ const App = () => {
       nw.push(band)
       setChecked(nw)
     }
-   
- 
   }
 
 
@@ -78,50 +80,53 @@ const App = () => {
     <div className="App">
       {loggedIn ? (
         <div>
-          <p>Logged in as {user.id}</p>
+          <p>Logged in as {"Muista User.id"}</p>
           <div>
-            {loading ? <div> <Loading/> </div> : 
-            <div>
-            <div className="filter">     
+            {loading ? <div> <Loading /> </div> :
+              <div>
+                <div className="filter">
 
-          <input 
-          defaultValue='Filter Artists' 
-          type="text"
-          placeholder="Filter Artists"
-          onKeyUp={event => 
-          handleFilterStringChange(event.target.value)}
-          />
-          </div>
-          <div className="buttoncontainer">
-          <button onClick={handleSaveButton}>
-  Save checked albums
-</button>
-            </div>
-        
-            <div className="container">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Artist Name</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  {bands()}
-                </tbody>
-              </table>
-              <div className="footer">
-              https://github.com/akuakuka/SpotifyHelperv2-BE
+                  <input
+                    defaultValue='Filter Artists'
+                    type="text"
+                    placeholder="Filter Artists"
+                    onKeyUp={event =>
+                      handleFilterStringChange(event.target.value)}
+                  />
                 </div>
-            </div>
-          </div>}
+                <div className="buttoncontainer">
+                  <button onClick={handleSaveButton}>
+                    Save checked albums
+                  </button>
+                  <button onClick={handleRemoveButton}>
+                    Remove all saved albums
+                </button>
+                </div>
+
+                <div className="container">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Artist Name</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {"bänditmuista"}
+                    </tbody>
+                  </table>
+                  <div className="footer">
+                    https://github.com/akuakuka/SpotifyHelperv2-BE
+                </div>
+                </div>
+              </div>}
           </div>
         </div>
       ) : (
           <div>
             <p>NOT LOGGED IN</p>
             <button onClick={handleLoginButton}>
-  Log in with Spotify
+              Log in with Spotify
 </button>
           </div>
         )}

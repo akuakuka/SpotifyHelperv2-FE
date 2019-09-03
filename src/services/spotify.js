@@ -24,7 +24,11 @@ const saveAlbumsToUser = async (albums) => {
     console.log(response)
     return response;
 }
-
+const removeAllfollowedAlbums = async () => {
+    const response = await a.post("removeAllFollowed")
+    console.log(response)
+    return response;
+}
 
 const ensureAuthenticated = async () => {
     const response = await a.get("ensureAuthenticated")
@@ -32,4 +36,4 @@ const ensureAuthenticated = async () => {
     return response;
 }
 
-export default { getMe, ensureAuthenticated, getArtistWithAlbums, saveAlbumsToUser } 
+export default { getMe,removeAllfollowedAlbums, ensureAuthenticated, getArtistWithAlbums, saveAlbumsToUser } 
