@@ -16,7 +16,7 @@ const App = () => {
     const init = async () => {
       const auth = await spotifyService.ensureAuthenticated();
       console.log(auth)
-      if (auth.statusText === "OK") {
+      if (auth.data != "Not Logged in!") {
         toggleLoggedIn(true);
         const user = await spotifyService.getMe();
         toggleLoading(true);
@@ -50,14 +50,14 @@ const App = () => {
     const rsp = await spotifyService.saveAlbumsToUser(checked)
     console.log(rsp)
   }
-  // const bands = () => artists.filter(kk => kk.name.toUpperCase()
-  //   .includes(filterString.toUpperCase())).map(band =>
-  //     <Band
-  //       key={band.id}
-  //       band={band}
-  //       check={handleCheckBox}
-  //     />
-  //   )
+   const bands = () => artists.filter(kk => kk.name.toUpperCase()
+    .includes(filterString.toUpperCase())).map(band =>
+      <Band
+         key={band.id}
+        band={band}
+        check={handleCheckBox}
+      />
+    )
 
   const handleCheckBox = async (band) => {
     let inx = _.indexOf(checked, band);
@@ -80,7 +80,7 @@ const App = () => {
     <div className="App">
       {loggedIn ? (
         <div>
-          <p>Logged in as {"Muista User.id"}</p>
+          <p>Logged in as {user.id}</p>
           <div>
             {loading ? <div> <Loading /> </div> :
               <div>
@@ -112,7 +112,7 @@ const App = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {"bänditmuista"}
+                      {bands()}
                     </tbody>
                   </table>
                   <div className="footer">
